@@ -7,4 +7,4 @@ from states.create_checker import CreateChecker
 from main import dp
 
 
-@dp.message_handler()
+# @dp.message_handler()
