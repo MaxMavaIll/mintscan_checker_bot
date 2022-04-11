@@ -28,8 +28,8 @@ async def enter_chain(message: types.Message, state: FSMContext):
 
     await CreateChecker.operator_address.set()
     await message.answer(
-        'Okay, now I need your validator operator address,'
-        'if you can find it)'
+        'Okay, now I need your validator operator address, '
+        'I think it\'s on your validator\'s page at mintscan.io)'
     )
 
 
@@ -40,5 +40,9 @@ async def enter_operator_address(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['operator_address'] = message.text
 
-    await state.finish()
+    await message.answer(
+        'Nice! Now I\'ll be checking this node all day long '
+        'till the end of time👌'
+    )
 
+    await state.reset_state(with_data=False)
