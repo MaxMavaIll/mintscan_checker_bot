@@ -1,8 +1,9 @@
-from aiogram import Bot, executor
-from aiogram.dispatcher import Dispatcher
+from aiogram import Bot, Dispatcher, executor
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 
 from environs import Env
+
+import handlers
 
 # Read environs
 env = Env()

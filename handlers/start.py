@@ -9,5 +9,5 @@ from main import dp
 
 @dp.message_handler(Command('start'))
 async def start(message: types.Message):
-    message.answer('Hello! The bot is running')
+    await message.answer('Hello! The bot is running')
 
