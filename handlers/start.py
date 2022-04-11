@@ -4,7 +4,7 @@ from aiogram.dispatcher.filters import Command
 
 from states.create_checker import CreateChecker
 
-from main import dp
+from loader import dp
 
 
 @dp.message_handler(Command('start'))
