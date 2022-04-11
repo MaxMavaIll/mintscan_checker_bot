@@ -1,21 +1,5 @@
-from aiogram import Bot, Dispatcher, executor
-from aiogram.contrib.fsm_storage.memory import MemoryStorage
-
-from environs import Env
-
-import handlers
-
-# Read environs
-env = Env()
-env.read_env()
-
-# Bot token from .env
-API_KEY = env.str('API_KEY')
-
-# Instance bot and dispatcher with FSM storage
-bot = Bot(API_KEY)
-storage = MemoryStorage()
-dp = Dispatcher(bot, storage=storage)
+from aiogram import executor
+from handlers import dp
 
 
 if __name__ == '__main__':
