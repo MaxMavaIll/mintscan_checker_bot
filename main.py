@@ -1,6 +1,6 @@
 from aiogram import executor
-from handlers import dp
-
+from loader import dp
+import handlers
 
 if __name__ == '__main__':
     # Continuously ask for updates
