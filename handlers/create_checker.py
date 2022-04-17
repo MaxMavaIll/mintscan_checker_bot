@@ -13,7 +13,7 @@ async def create_checker(message: types.Message, state: FSMContext):
 
     await message.answer(
         'Let\'s see...\n'
-        'What\'s your validator\'s network again?'
+        'What\'s your validator\'s network?'
     )
 
     await CreateChecker.chain.set()
@@ -21,20 +21,20 @@ async def create_checker(message: types.Message, state: FSMContext):
 
 @dp.message_handler(state=CreateChecker.chain)
 async def enter_chain(message: types.Message, state: FSMContext):
-    """Enter chain name handler"""
+    """Enter chain name"""
 
     async with state.proxy() as data:
         data['chain'] = message.text
 
     await CreateChecker.operator_address.set()
     await message.answer(
-        'Okay, now I need the operator address of this validator'
+        'Okay, now I need the name of this validator'
     )
 
 
 @dp.message_handler(state=CreateChecker.operator_address)
 async def enter_operator_address(message: types.Message, state: FSMContext):
-    """Enter validator's operator address"""
+    """Enter validator's name"""
 
     data = await state.get_data()
     chain = data.pop('chain')
