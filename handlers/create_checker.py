@@ -8,12 +8,12 @@ from loader import dp
 
 
 @dp.message_handler(Command('create_checker'))
-async def create_checker(message: types.Message):
+async def create_checker(message: types.Message, state: FSMContext):
     """Entry point for create checker conversation"""
 
     await message.answer(
-        'Hello there! Let\'s see...\n'
-        'What\'s your validator\'s chain name again?'
+        'Let\'s see...\n'
+        'What\'s your validator\'s network again?'
     )
 
     await CreateChecker.chain.set()
@@ -28,8 +28,7 @@ async def enter_chain(message: types.Message, state: FSMContext):
 
     await CreateChecker.operator_address.set()
     await message.answer(
-        'Okay, now I need your validator operator address, '
-        'I think it\'s on your validator\'s page at mintscan.io)'
+        'Okay, now I need the operator address of this validator'
     )
 
 
@@ -37,11 +36,19 @@ async def enter_chain(message: types.Message, state: FSMContext):
 async def enter_operator_address(message: types.Message, state: FSMContext):
     """Enter validator's operator address"""
 
+    data = await state.get_data()
+    chain = data.pop('chain')
+
     async with state.proxy() as data:
-        data['operator_address'] = message.text
+        data.setdefault('validators', {})
+        i = len(data.get('validators'))
+        data['validators'][i] = {
+            'chain': chain,
+            'operator_address': message.text
+        }
 
     await message.answer(
-        'Nice! Now I\'ll be checking this node all day long '
+        'Nice! Now I\'ll be checking this validator all day long '
         'till the end of time👌'
     )
 
