@@ -11,7 +11,7 @@ async def start(message: types.Message):
         '\n'
         'You can add validator checker through /create_checker command. \n'
         'This will make me check this validator for missing blocks. \n'
-        'You can add any as many validators as you like. \n'
+        'Add any as many validators as you like. \n'
         '\n'
         'I work with any network available at mintscan.io.'
     )
